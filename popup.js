@@ -1,24 +1,27 @@
 // popup.js
 
+document.addEventListener("DOMContentLoaded", () => {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const currentUrl = tabs[0]?.url || "";
+    document.getElementById("url").value = currentUrl;
+    updatePopup();
+  });
+});
+
 document.getElementById("start").addEventListener("click", () => {
-  const url = document.getElementById("url").value;
-  if (url) {
-    chrome.storage.local.set(
-      {
-        monitoring: true,
-        url: url,
-        lastContent: "", // Initialize lastContent as empty
-        changes: 0,
-        checks: 0,
-      },
-      () => {
-        updatePopup();
-        chrome.runtime.sendMessage({ action: "startMonitoring" });
-      }
-    );
-  } else {
-    alert("Please enter a URL.");
-  }
+  const url = document.getElementById("url").value || "";
+  chrome.storage.local.set(
+    {
+      monitoring: true,
+      lastContent: "", // Initialize lastContent as empty
+      changes: 0,
+      checks: 0,
+    },
+    () => {
+      updatePopup();
+      chrome.runtime.sendMessage({ action: "startMonitoring", url: url });
+    }
+  );
 });
 
 document.getElementById("stop").addEventListener("click", () => {
@@ -29,6 +32,8 @@ document.getElementById("stop").addEventListener("click", () => {
 });
 
 function updatePopup() {
+  const url = document.getElementById("url").value || "";
+
   chrome.storage.local.get(
     ["monitoring", "url", "changes", "checks"],
     (data) => {
@@ -37,7 +42,7 @@ function updatePopup() {
         document.getElementById("stop").classList.remove("hidden");
         document.getElementById(
           "message"
-        ).textContent = `Monitoring started for ${data.url}`;
+        ).textContent = `Monitoring started for ${url}`;
         document.getElementById("message").classList.remove("hidden");
       } else {
         document.getElementById("start").classList.remove("hidden");
@@ -56,5 +61,3 @@ function updatePopup() {
     }
   );
 }
-
-document.addEventListener("DOMContentLoaded", updatePopup);
