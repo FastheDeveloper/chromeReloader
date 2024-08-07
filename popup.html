@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Page Update Notifier</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        width: 300px;
+        padding: 10px;
+        text-align: center;
+      }
+      button {
+        margin: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      #start {
+        background-color: #4caf50;
+        color: white;
+      }
+      #stop {
+        background-color: #f44336;
+        color: white;
+      }
+      #message {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #333;
+      }
+      #changes,
+      #checks {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #333;
+      }
+      .hidden {
+        display: none;
+      }
+      #url {
+        width: 100%;
+        padding: 8px;
+        margin-top: 10px;
+      }
+    </style>
+    <script src="popup.js" defer></script>
+  </head>
+  <body>
+    <h1>Page Update Notifier</h1>
+    <input type="text" id="url" placeholder="Enter URL here" />
+    <button id="start">Start Monitoring</button>
+    <button id="stop" class="hidden">Stop Monitoring</button>
+    <div id="message" class="hidden"></div>
+    <div id="changes" class="hidden">Number of changes: 0</div>
+    <div id="checks" class="hidden">Number of times checked: 0</div>
+  </body>
+</html>
