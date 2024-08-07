@@ -16,6 +16,7 @@
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        transition: background-color 0.3s ease;
       }
       #start {
         background-color: #4caf50;
@@ -24,6 +25,12 @@
       #stop {
         background-color: #f44336;
         color: white;
+      }
+      #start:hover {
+        background-color: #45a049;
+      }
+      #stop:hover {
+        background-color: #e53935;
       }
       #message {
         margin-top: 10px;
@@ -39,10 +46,20 @@
       .hidden {
         display: none;
       }
-      #url {
-        width: 100%;
-        padding: 8px;
+      input[type="text"] {
+        width: calc(100% - 22px); /* Adjust for padding and border */
+        padding: 10px;
         margin-top: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: border-color 0.3s ease;
+      }
+      input[type="text"]:focus {
+        border-color: #4caf50;
+        outline: none;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
       }
     </style>
     <script src="popup.js" defer></script>
